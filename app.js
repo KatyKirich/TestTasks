@@ -1,39 +1,29 @@
-const fs = require('fs')
-const path=require('path')
-const zlib = require('zlib')
+const fs = require("fs");
+const path = require("path");
+const zlib = require("zlib");
 
-const inpPath = './input'
+const inpPath = "./input";
+const outPath = "./output";
 
-function getFileName(path, callback) {
-    fs.readdir(path, function (err, content) {
-        if (err) return callback(err)
-        callback(null, content)
-    })
-}
+fs.readdir(inpPath, (err, folder) => {
+  if (err) {
+    console.log(err);
+  } else {
+    folder.forEach((i) => {
+      console.log("File Names:" + i);
 
-getFileName(inpPath, function (err, files) {
+      const readStream = fs.createReadStream(path.join(inpPath, i));
+      console.log("Create readStream");
 
-    const readStream = fileNames.forEach((i)=>{
-        fs.createReadStream(path.join(inpPath, i)
-    )})
-    
-    const writeStream = fileNames.forEach((i)=>{
-        fs.createWriteStream(path.join(inpPath, i)
-    )})
+      const writeStream = fs.createWriteStream(path.join(outPath, i));
+      console.log("Create writeStream");
 
-    const compressStream = zlib.createGzip()
+      const compressStream = zlib.createGzip();
+      console.log("Create compressStream");
 
-    readStream.pipe(compressStream).pipe(writeStream)
-    fileNames = files
-    console.log('File Names:')
-    console.log(fileNames)
-})
+      readStream.pipe(compressStream).pipe(writeStream);
 
-
-
- 
-    
-
-    
-
-
+      console.log("Copy done");
+    });
+  }
+});
