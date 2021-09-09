@@ -1,39 +1,39 @@
-const fs = require('fs')
-const path=require('path')
-const zlib = require('zlib')
+const fs = require("fs");
+const path = require("path");
+const zlib = require("zlib");
 
-const inpPath = './input'
+const inpPath = "./input";
+const outPath = "./output";
 
-function getFileName(path, callback) {
-    fs.readdir(path, function (err, content) {
-        if (err) return callback(err)
-        callback(null, content)
-    })
-}
+fs.readdir(inpPath, (err, folder) => {
+  if (err) {
+    console.log(err);
+  } else {
+    folder.forEach((i) => {
+      console.log("File Names:" + i);
 
-getFileName(inpPath, function (err, files) {
+      const readStream = fs.createReadStream(path.join(inpPath, i));
+      
 
-    const readStream = fileNames.forEach((i)=>{
-        fs.createReadStream(path.join(inpPath, i)
-    )})
-    
-    const writeStream = fileNames.forEach((i)=>{
-        fs.createWriteStream(path.join(inpPath, i)
-    )})
+      const writeStream = fs.createWriteStream(path.join(outPath, i));
+      
 
-    const compressStream = zlib.createGzip()
+      const compressStream = zlib.createGzip();
+     
 
-    readStream.pipe(compressStream).pipe(writeStream)
-    fileNames = files
-    console.log('File Names:')
-    console.log(fileNames)
-})
+      readStream.on('data', (chunk) => {
+        
+        console.log(`Received ${chunk.length} bytes of data.`);
+        
+      }).pipe(compressStream).pipe(writeStream)
+      
+      readStream.on('end', () => {
 
+        console.log('There will be no more data.');
+        console.log("Copy done");
+      });
 
-
- 
-    
-
-    
-
-
+     
+    });
+  }
+});
