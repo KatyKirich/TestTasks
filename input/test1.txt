@@ -1,11 +1,16 @@
+<<<<<<< HEAD
 rgtibhjrpbjhuritgjrtgujnprodf
 
+=======
+rkotortogortijgitojgoritjritjowrtjrt
+>>>>>>> e337e16bf962686abfcde4f4ea52254dc49a4d16
 rtfoirrnhfgbrnhvhrn
 loremefrjvrihuftvgnhriughriut
 orfvnhrfjtvnirjgtfnvirjfnhvr
 efvugrhfjthvnrjtfnhvirjtf
 fkvmrogfburhiubrnhoktvlc
 rvgeirmftbvh;krtnfbvij5rnhfv
+<<<<<<< HEAD
 erwv5gkuergvjunerkjvnwerviounhe;rkotortogortijgitojgoritjritjowrtjrt
 rtfoirrnhfgbrnhvhrn
 loremefrjvrihuftvgnhriughriut
@@ -245,3 +250,6 @@ Integer consectetur enim lorem, at maximus ipsum efficitur a. In ut ligula eget 
 
 Cras viverra sollicitudin facilisis. Pellentesque ut congue orci. Cras aliquam erat enim, ut maximus lorem ultricies eget. Sed scelerisque faucibus urna ac sollicitudin. Vivamus ornare, dolor in rutrum laoreet, sapien neque maximus leo, eu fringilla nisl ipsum non urna. Curabitur ac pretium ligula. In sollicitudin bibendum est, ut egestas sapien congue vitae.
 
+=======
+erwv5gkuergvjunerkjvnwerviounhe;
+>>>>>>> e337e16bf962686abfcde4f4ea52254dc49a4d16
