@@ -24,13 +24,19 @@ folderPromise.then((data) => {
     promises.push(
       new Promise((res, rej) => {
         const readStream = fs.createReadStream(path.join(inpPath, i));
-        console.log("Create read stream");
+        readStream.on("open", () => {
+          console.log(`createReadStream`);
+        });
 
         const writeStream = fs.createWriteStream(path.join(outPath, i));
-        console.log("Create write stream");
+        writeStream.on("open", () => {
+          console.log(`createWriteStream`);
+        });
 
         const compressStream = zlib.createGzip();
-        console.log("Create zip");
+        compressStream.on("open", () => {
+          console.log(`compressStream`);
+        });
 
         readStream
           .on("data", () => {
@@ -38,7 +44,15 @@ folderPromise.then((data) => {
           })
           .pipe(compressStream)
           .pipe(writeStream)
-          .on("end", () => res);
+          .on("end", () => res, "END");
+
+        fs.unlink(path.join(inpPath, i), (err) => {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log("Files deleted");
+          }
+        });
       })
     );
   });
