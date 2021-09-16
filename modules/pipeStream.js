@@ -8,11 +8,11 @@ async function pipeStream(iPath, oPath, data) {
     await pipeline(
       fs
         .createReadStream(path.join(iPath, file))
-        .on("open", () => console.log("Create Read Stream")),
+        .on("open", () => console.log(`Create Read Stream: ${file}`)),
       zlib.createGzip(),
       fs
         .createWriteStream(path.join(oPath, file + ".gz"))
-        .on("open", () => console.log("Create Write Stream"))
+        .on("open", () => console.log(`Create Write Stream: ${file}`))
     );
   });
 }

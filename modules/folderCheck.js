@@ -1,11 +1,12 @@
 const fs = require("fs");
-const createFolder = require("./createFolder");
 
 function folderCheck(path) {
   if (fs.existsSync(path)) {
     console.log("You have output folder");
   } else {
-    createFolder(path);
+    fs.mkdir(path, (err) => {
+      if (err) throw err;
+    });
     console.log("Folder created");
   }
 }
