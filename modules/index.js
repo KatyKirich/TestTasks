@@ -16,9 +16,11 @@ async function movingFiles(from, to) {
       const promises = await pipeStream(from, to, files);
       console.log(promises);
       // 3. PROMISE.ALL
-      await Promise.all(promises).then(console.log("Promises done"));
+      await Promise.all(promises);
+      console.log("Promises done");
       //4. REMOVE FILES
-      await removeFiles(from, files).then(console.log("Files deleted"));
+      await removeFiles(from, files);
+      console.log("Files deleted");
 
       console.log("Files transfer done");
     } else {
