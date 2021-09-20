@@ -1,4 +1,5 @@
 const https = require("https");
+const calculateMovingAverage = require("./module/calculateMovingAverage");
 
 const usdIdAfter0708 = 431;
 const startDate = new Date(2020, 11, 1).toUTCString();
@@ -32,7 +33,19 @@ const getRates = (id) =>
       })
     );
 
-getRates(usdIdAfter0708).then(console.log);
-
-// const rates = [...(await getRates(usdId)), ...(await getRates(usdIdAfter0708))];
-// console.log(rates);
+getRates(usdIdAfter0708).then((data) => {
+  const result = data.reduce((total, current, index, array) => {
+    if (index <= 30) {
+      return total;
+    }
+    total.push({
+      date: current.Date,
+      cource: current.Cur_OfficialRate,
+      movingAverageCourse: calculateMovingAverage(
+        array.slice(index - 30, index)
+      ),
+    });
+    return total;
+  }, []);
+  console.log(result);
+});
