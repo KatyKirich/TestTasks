@@ -1,13 +1,10 @@
 const https = require("https");
-const calculateMovingAverage = require("./module/calculateMovingAverage");
+const getURL = require("./module/getURL");
+const createTotalArr = require("./module/crateTotalArr");
 
 const usdIdAfter0708 = 431;
 const startDate = new Date(2020, 11, 1).toUTCString();
 const today = new Date().toUTCString();
-
-function getURL(currencyId, startDate, endDate) {
-  return `https://www.nbrb.by/API/ExRates/Rates/Dynamics/${currencyId}?startDate=${startDate}&endDate=${endDate}`;
-}
 
 const getRates = (id) =>
   new Promise((res, rej) => {
@@ -34,18 +31,6 @@ const getRates = (id) =>
     );
 
 getRates(usdIdAfter0708).then((data) => {
-  const result = data.reduce((total, current, index, array) => {
-    if (index <= 30) {
-      return total;
-    }
-    total.push({
-      date: current.Date,
-      cource: current.Cur_OfficialRate,
-      movingAverageCourse: calculateMovingAverage(
-        array.slice(index - 30, index)
-      ),
-    });
-    return total;
-  }, []);
+  const result = createTotalArr(data);
   console.log(result);
 });
