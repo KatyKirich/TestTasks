@@ -1,33 +1,27 @@
-const https = require("https");
 const createTotalArr = require("./createTotalArr");
-const getArrCurID = require("./getArrCurId");
 const getURL = require("./getURL");
+const requestGet = require("./RequestGet");
 
-const getRates = (id, startDate, endDate, date, course) =>
-  new Promise((res, rej) => {
-    let dataRates = "";
+const getRates = async (urlArr, startDate, endDate, date, course) => {
+  const arrIds = await requestGet(urlArr).map((el) => {
+    return el.Cur_ID;
+  });
 
-    https
-      .get(getURL(id, startDate, endDate), (httpsResponse) => {
-        httpsResponse.on("data", (data) => {
-          dataRates += data.toString();
-        });
+  console.log(arrIds);
 
-        httpsResponse.on("error", rej);
-
-        httpsResponse.on("end", () => res(dataRates));
+  return arrIds.forEach((id) =>
+    requestGet(getURL(id, startDate, endDate))
+      .then((res) =>
+        res.map((el) => {
+          delete el.Cur_ID;
+          return el;
+        })
+      )
+      .then((data) => {
+        const result = createTotalArr(data, date, course);
+        console.log(result);
       })
-      .on("error", rej);
-  })
-    .then(JSON.parse)
-    .then((res) => {
-      return res;
-    })
-
-    .then((data) => {
-      const arrCurId = getArrCurID(data);
-      const result = createTotalArr(arrCurId, date, course);
-      console.log(result);
-    });
+  );
+};
 
 module.exports = getRates;
