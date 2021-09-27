@@ -3,7 +3,7 @@ const getURL = require("./getURL");
 const requestGet = require("./RequestGet");
 
 const getRates = async (urlArr, startDate, endDate, date, course) => {
-  const arrIds = await requestGet(urlArr).map((el) => {
+  const arrIds = (await requestGet(urlArr)).map((el) => {
     return el.Cur_ID;
   });
 
