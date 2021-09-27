@@ -13,7 +13,6 @@ async function requestGet(url) {
   })
     .then(JSON.parse)
     .then((data) => {
-      console.log(data);
       return data;
     });
 }

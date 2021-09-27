@@ -7,21 +7,20 @@ const getRates = async (urlArr, startDate, endDate, date, course) => {
     return el.Cur_ID;
   });
 
-  console.log(arrIds);
-
-  return arrIds.forEach((id) =>
-    requestGet(getURL(id, startDate, endDate))
-      .then((res) =>
-        res.map((el) => {
-          delete el.Cur_ID;
-          return el;
-        })
-      )
-      .then((data) => {
-        const result = createTotalArr(data, date, course);
-        console.log(result);
+  const promises = arrIds.map((id) =>
+    requestGet(getURL(id, startDate, endDate)).then((res) =>
+      res.map((el) => {
+        delete el.Cur_ID;
+        return el;
       })
+    )
   );
+  console.log(promises);
+  Promise.all(promises).then((data) => {
+    console.log(data);
+    const result = createTotalArr(data, date, course);
+    console.log(result);
+  });
 };
 
 module.exports = getRates;
