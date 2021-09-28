@@ -16,10 +16,11 @@ const getRates = async (urlArr, startDate, endDate, date, course) => {
     )
   );
   console.log(promises);
-  Promise.all(promises).then((data) => {
-    console.log(data);
+  return Promise.all(promises).then((data) => {
+    // console.log(data);
     const result = createTotalArr(data, date, course);
     console.log(result);
+    return result;
   });
 };
 
