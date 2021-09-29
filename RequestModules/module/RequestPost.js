@@ -1,7 +1,9 @@
-const http = require("http");
+const checkProtocol = require("./checkProtocol");
 
-function requestPost(options, myData) {
-  const req = http.request(options, (res) => {
+function requestPost(options, myData, url) {
+  const protocol = checkProtocol(url);
+
+  const req = protocol.request(options, (res) => {
     console.log(`STATUS: ${res.statusCode}`);
     console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
     res.setEncoding("utf8");

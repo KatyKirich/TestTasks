@@ -1,26 +1,16 @@
-const https = require("https");
-const http = require("http");
+const checkProtocol = require("./checkProtocol");
 
 function requestGet(url) {
   let reqData = "";
+  const protocol = checkProtocol(url);
   return new Promise((res, rej) => {
-    if (url.protocol === "https:") {
-      https.get(url, (httpsReq) => {
-        httpsReq.on("data", (data) => {
-          reqData += data.toString();
-        });
-        httpsReq.on("err", rej);
-        httpsReq.on("end", () => res(reqData));
+    protocol.get(url, (httpsReq) => {
+      httpsReq.on("data", (data) => {
+        reqData += data.toString();
       });
-    } else {
-      http.get(url, (httpRes) => {
-        httpRes.on("data", (data) => {
-          reqData += data.toString();
-        });
-        httpRes.on("err", rej);
-        httpRes.on("end", () => res(reqData));
-      });
-    }
+      httpsReq.on("err", rej);
+      httpsReq.on("end", () => res(reqData));
+    });
   })
     .then(JSON.parse)
     .then((data) => {
