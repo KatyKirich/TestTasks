@@ -1,7 +1,19 @@
 const checkProtocol = require("./checkProtocol");
+const { urlToHttpOptions } = require("url");
 
-function requestPost(options, myData, url) {
+function requestPost(myData, url) {
   const protocol = checkProtocol(url);
+
+  const options = urlToHttpOptions(url);
+  console.log(options);
+
+  options.method = "POST";
+  options.headers = {
+    "Content-Type": "application/json",
+    "Content-Length": Buffer.byteLength(myData),
+    Authorization:
+      "Bearer bad9f059a82ad35987e5030bc46d970960860a47e9be0597f554a987cf840cc5",
+  };
 
   const req = protocol.request(options, (res) => {
     console.log(`STATUS: ${res.statusCode}`);
