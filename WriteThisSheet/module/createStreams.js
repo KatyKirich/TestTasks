@@ -5,6 +5,7 @@ const createFiles = require("./createFiles");
 async function createStreams(data, start, end) {
   return await data.map(async (arr) => {
     createFiles(arr, start, end);
+
     // await pipeline(
     //   fs
     //     .createReadStream(path.join(iPath, file))
