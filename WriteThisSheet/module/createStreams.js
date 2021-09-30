@@ -1,10 +1,13 @@
-const path = require("path");
+const fs = require("fs");
 const { pipeline } = require("stream/promises");
-const createFiles = require("./createFiles");
+const filePath = require("./filePath");
 
-async function createStreams(data, start, end) {
+async function createStreams(data) {
   return await data.map(async (arr) => {
-    createFiles(arr, start, end);
+    fs.writeFile(filePath(arr), data.toString(), (err) => {
+      if (err) throw err;
+      console.log("The file has been saved!");
+    });
 
     // await pipeline(
     //   fs
