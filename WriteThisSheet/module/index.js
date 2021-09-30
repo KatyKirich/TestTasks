@@ -15,10 +15,10 @@ const getRates = async (urlArr, startDate, endDate) => {
     )
   );
 
-  console.log(promises);
+  // console.log(promises);
   return Promise.all(promises).then((data) => {
     createStreams(data);
-    console.log(data);
+    // console.log(data);
   });
 };
 

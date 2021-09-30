@@ -8,16 +8,6 @@ async function createStreams(data) {
       if (err) throw err;
       console.log("The file has been saved!");
     });
-
-    // await pipeline(
-    //   fs
-    //     .createReadStream(path.join(iPath, file))
-    //     .on("open", () => console.log(`Create Read Stream: ${file}`)),
-
-    //   fs
-    //     .createWriteStream(path.join(oPath, file))
-    //     .on("open", () => console.log(`Create Write Stream: ${file}`))
-    // );
   });
 }
 
