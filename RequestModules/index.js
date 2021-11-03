@@ -1,10 +1,12 @@
-// const requestGet = require("./module/RequestGet");
-// const MyURL = new URL("https://www.nbrb.by/api/exrates/rates?periodicity=0");
+//do GET
 
-// requestGet(MyURL).then((result) => {
-//   console.log(result);
-//   console.log("Request GET is done!");
-// });
+const requestGet = require("./module/RequestGet");
+const MyURL = new URL("https://www.nbrb.by/api/exrates/rates?periodicity=0");
+
+requestGet(MyURL).then((result) => {
+  console.log(result);
+  console.log("Request GET is done!");
+});
 
 // do POST
 const requestPost = require("./module/RequestPost");
@@ -18,4 +20,5 @@ const postData = JSON.stringify({
   status: "active",
 });
 
-requestPost(postData, myURL);
+requestPost(postData, myURL).then(()=>{console.log("Job is done!")})
+
