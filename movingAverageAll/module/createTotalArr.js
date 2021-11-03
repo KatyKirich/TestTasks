@@ -1,7 +1,10 @@
 const calculateAverage = require("./calculateAverage");
 
 function createTotalArr(data, date, course) {
-  return data
+
+  console.log(data);
+  const result = data
+    .flat()
     .map((current, index, array) => {
       if (index <= 30) return;
       return {
@@ -14,6 +17,8 @@ function createTotalArr(data, date, course) {
       };
     })
     .filter(Boolean);
+  console.log("Create Total Arr", result);
+  return result;
 }
 
 module.exports = createTotalArr;

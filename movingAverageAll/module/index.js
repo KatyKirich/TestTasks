@@ -1,5 +1,7 @@
 const createTotalArr = require("./createTotalArr");
-const getURL = require("./getURL");
+
+const getArrIds = require('./getArrIds')
+
 const requestGet = require("./RequestGet");
 
 const getRates = async (urlArr, startDate, endDate, date, course) => {
@@ -7,21 +9,13 @@ const getRates = async (urlArr, startDate, endDate, date, course) => {
     return el.Cur_ID;
   });
 
-  console.log(arrIds);
 
-  return arrIds.forEach((id) =>
-    requestGet(getURL(id, startDate, endDate))
-      .then((res) =>
-        res.map((el) => {
-          delete el.Cur_ID;
-          return el;
-        })
-      )
-      .then((data) => {
-        const result = createTotalArr(data, date, course);
-        console.log(result);
-      })
-  );
+  return Promise.all(getArrIds(arrIds,startDate,endDate)).then((data) => {
+    // console.log(data);
+    return createTotalArr(data, date, course);
+    
+  });
+
 };
 
 module.exports = getRates;
