@@ -6,6 +6,8 @@ const date = "Date";
 const curOffRate = "Cur_OfficialRate";
 const url = "https://www.nbrb.by/api/exrates/rates?periodicity=0";
 
-getRates(url, startDate, today, date, curOffRate).then(() =>
+getRates(url, startDate, today, date, curOffRate).then((res) =>{
+  console.log(res)
   console.log("Job is done!")
+}
 );
