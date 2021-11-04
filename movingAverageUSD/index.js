@@ -6,7 +6,6 @@ const today = new Date().toUTCString();
 const date = "Date";
 const curOffRate = "Cur_OfficialRate";
 
-getRates(usdIdAfter0708, startDate, today, date, curOffRate).then((res) =>{console.log(res);
-   console.log("Job is done!")}
-  
+getRates(usdIdAfter0708, startDate, today, date, curOffRate).then(() =>
+  console.log("Job is done!")
 );
